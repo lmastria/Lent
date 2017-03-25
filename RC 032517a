@@ -1,0 +1,137 @@
+//: Playground - noun: a place where people can play
+
+import UIKit
+
+var str = "Hello, playground"
+
+// Copyright (c) Lou Mastria 2017 Mastria, LLC.
+
+import UIKit
+
+print("Welcome!")
+print("We hope when you leave, you will say that we Lent you a hand.")
+let userCalendar = Calendar.current
+
+//Let's figure out what day today is
+let today = NSDate()
+
+let dateFormatter = DateFormatter()
+dateFormatter.dateStyle = .long
+let string1 = dateFormatter.string(from: today as Date)
+
+
+let date = Date()
+let calendar = Calendar.current
+let year = calendar.component(.year, from:date )
+let month = calendar.component(.month, from:date )
+let day = calendar.component(.day, from:date )
+let dayOfWeek = calendar.component(.weekday, from:date ) - 1
+let daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday", "Thursday", "Friday", "Saturday"]
+var weekDay = (daysOfWeek[dayOfWeek])
+
+let formatter = DateFormatter()
+formatter.dateFormat = "MMMM dd,yyyy"
+
+print ("Today is \(weekDay) \(formatter.string(from: NSDate() as Date))")
+
+//Is today inside current Lent?//
+var currentLentDateStartComponents = DateComponents()
+currentLentDateStartComponents.year = 2017
+currentLentDateStartComponents.month = 3
+currentLentDateStartComponents.day = 1
+let currentLentDateStart = userCalendar.date(from: currentLentDateStartComponents)!
+let myFormatter = DateFormatter()
+myFormatter.dateStyle = .full
+myFormatter.string(from: currentLentDateStart)
+
+var currentLentDateStopComponents = DateComponents()
+currentLentDateStopComponents.year = 2017
+currentLentDateStopComponents.month = 4
+currentLentDateStopComponents.day = 16
+let currentLentDateStop = userCalendar.date(from: currentLentDateStopComponents)!
+myFormatter.dateStyle = .full
+myFormatter.string(from: currentLentDateStop)
+
+
+
+print("In \(currentLentDateStartComponents.year!), Lent begins on \(myFormatter.string(from: currentLentDateStart)).")
+
+print("Easter Sunday is the end of Lent and it will be on \(myFormatter.string(from: currentLentDateStop)).")
+
+if (date >= currentLentDateStart && date <= currentLentDateStop) {
+    print("You are inside Lent for \(currentLentDateStopComponents.year!).")
+} else {
+    print("You are outside of Lent for \(currentLentDateStopComponents.year!).")
+}
+
+if  (date >= currentLentDateStart && date <= currentLentDateStop) && (weekDay == "Friday"){
+    print("Today is \(weekDay)...watch out for meat cravings.")
+    if (date == currentLentDateStart){
+        print("Today is Ash Wednesday, watch out for meat cravings and go get your ashes.")
+    }
+} else {
+    print("It's ok to eat meat today.")
+}
+
+let currentCalendar = Calendar.current
+
+myFormatter.dateStyle = .full
+myFormatter.string(from: date)
+myFormatter.string(from: currentLentDateStop)
+
+let start1 = currentCalendar.ordinality(of: .day, in: .era, for: date)
+let end1 = currentCalendar.ordinality(of: .day, in: .era, for: currentLentDateStop)
+
+print ("There are \( end1! - start1! ) more days until the end  of Lent this year.")
+
+
+
+var str1 = "When is the next Lent?"
+print(str1)
+
+
+//Let's figure out when the Next Lenten Period is //
+var nextLentDateComponents = DateComponents()
+nextLentDateComponents.year = 2018
+nextLentDateComponents.month = 2
+nextLentDateComponents.day = 14
+let nextLentDate = userCalendar.date(from: nextLentDateComponents)!
+//let myFormatter = DateFormatter()
+myFormatter.dateStyle = .full
+myFormatter.string(from: nextLentDate)
+
+let string2 = dateFormatter.string(from: nextLentDate as Date)
+print ("The next Lenten period will start \(myFormatter.string(from: nextLentDate)).")
+
+//Countdown until next Lent//
+
+// Countdown 5
+// actuallly working!!!!
+
+
+//let currentCalendar = Calendar.current
+
+let todaysDate = Date()
+let components = calendar.dateComponents([.year, .month, .day], from: date)
+
+let todaysYear =  components.year
+let todaysMonth = components.month
+let todaysDay = components.day
+let todaysToday = currentCalendar.date(from: components)!
+
+
+
+
+myFormatter.dateStyle = .full
+myFormatter.string(from: todaysToday)
+
+myFormatter.string(from: nextLentDate)
+
+let start = currentCalendar.ordinality(of: .day, in: .era, for: todaysToday)
+let end = currentCalendar.ordinality(of: .day, in: .era, for: nextLentDate)
+
+print ("There are \( end! - start! ) days until next Lent.")
+
+//Run it again
+
+
